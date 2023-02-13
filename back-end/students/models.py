@@ -20,11 +20,4 @@ class Students(models.Model):
         choices=SERIE_YEAR_CHOICES,
         default=1
     )
-
-# student = (
-#     name='Paulo Henrique Marques Ogaki',
-#     father='Paulo Mituo Ogaki',
-#     mother='Eva Cristina Marques Ogaki',
-#     phone='44999920655',
-#     serie_year='7'
-# )
+    courses = models.ManyToManyField('courses.Courses', related_name='students')
