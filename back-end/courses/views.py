@@ -17,3 +17,20 @@ class CoursesSimpleViews(APIView):
 
         created_student = Courses.objects.create(**course_data.validated_data)
         return Response({ 'type': 'success', 'message': 'Successfully registered course' })
+
+class CoursesComplexViews(APIView):
+    def patch(self, request, course_id):
+        get_course = get_object_or_404(Courses, id=course_id)
+        serializer = CoursesSerializer(get_course, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        request_items = request.data.items()
+
+        for key, value in request_items:
+            if key in ['id']:
+                return Response({
+                    key: f"You can not updated {key} property"
+                    }, status.HTTP_422_UNPROCESSABLE_ENTITY)
+                continue
+        
+        serializer.save()
+        return Response(serializer.data)
