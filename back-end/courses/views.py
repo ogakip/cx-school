@@ -40,3 +40,9 @@ class CoursesComplexViews(APIView):
         get_course.delete()
         
         return Response(status = status.HTTP_204_NO_CONTENT)
+    
+    def get(self, request, course_id):
+        get_course = get_object_or_404(Courses, id=course_id)
+        serializer = CoursesSerializer(get_course)
+
+        return Response(serializer.data)
