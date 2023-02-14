@@ -6,6 +6,7 @@ class Students(models.Model):
     father = models.CharField(max_length=255)
     mother = models.CharField(max_length=255)
     phone = models.CharField(max_length=11)
+    age = models.IntegerField(default=12)
     SERIE_YEAR_CHOICES = [
         ('1', 'Sexto Ano'),
         ('2', 'Sétimo Ano'),
