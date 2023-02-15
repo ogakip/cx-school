@@ -1,4 +1,4 @@
-const student = {
+export const student = {
 	name: '',
 	father: '',
 	mother: '',
@@ -9,5 +9,13 @@ const student = {
 
 export const initialValues = {
 	students: [student],
-	getAllStudents: () => '',
+	studentCourses: [],
+	selectedStudent: student,
+	getAllStudents: async () => '',
+	createStudent: async () => '',
+	editStudent: async () => '',
+	deleteStudent: async () => '',
+	getStudentCourses: async () => '',
+	selectCurrentStudent: async () => '',
+	addStudentCourse: async () => '',
 };
