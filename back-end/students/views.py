@@ -62,3 +62,9 @@ class StudentCustomViews(APIView):
         get_student.courses.add(get_course)
         get_student.save()
         return Response({ 'type': 'success', 'message': 'Course added successfully' })
+
+class StudentCustomCourseViews(APIView):
+    def get(self, request, student_id):
+        get_student = get_object_or_404(Students, id=student_id)
+        get_courses_of_student = get_student.courses.values()
+        return Response(get_courses_of_student)
