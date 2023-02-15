@@ -4,6 +4,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import StudentSerializer
 from .models import Students
+from courses.models import Courses
+from courses.serializers import CoursesSerializer
 from .custom_error import InvalidData
 
 class StudentsSimpleViews(APIView):
@@ -47,3 +49,16 @@ class StudentComplexViews(APIView):
         serializer = StudentSerializer(get_student)
 
         return Response(serializer.data)
+
+class StudentCustomViews(APIView):
+    def patch(self, request, student_id, course_id):
+        get_student = get_object_or_404(Students, id=student_id)
+        get_course = get_object_or_404(Courses, id=course_id)
+        teste = get_student.courses.values()
+        for value in teste:
+            if value['id'] == get_course.id:
+                return Response({ 'type': 'error', 'message': 'This course has already been added' }, status=status.HTTP_400_BAD_REQUEST)
+                continue
+        get_student.courses.add(get_course)
+        get_student.save()
+        return Response({ 'type': 'success', 'message': 'Course added successfully' })
