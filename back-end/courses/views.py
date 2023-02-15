@@ -46,3 +46,9 @@ class CoursesComplexViews(APIView):
         serializer = CoursesSerializer(get_course)
 
         return Response(serializer.data)
+
+class CoursesCustomViews(APIView):
+    def get(self, request, course_id):
+        get_course = get_object_or_404(Courses, id=course_id)
+        get_students_of_course = get_course.students.values()
+        return Response(get_students_of_course)
