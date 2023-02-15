@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { App } from './App';
 import reportWebVitals from './reportWebVitals';
 import { ContextProvider } from './context';
 import { Toaster } from 'react-hot-toast';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './routes';
+import { GlobalStyle } from './styles/global';
 
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement
@@ -11,8 +13,9 @@ const root = ReactDOM.createRoot(
 root.render(
 	<React.StrictMode>
 		<ContextProvider>
+			<RouterProvider router={router} />
 			<Toaster position='top-center' reverseOrder={false} />
-			<App />
+			<GlobalStyle/>
 		</ContextProvider>
 	</React.StrictMode>
 );
